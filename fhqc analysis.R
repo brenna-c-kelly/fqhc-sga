@@ -1,5 +1,6 @@
 
 library(sf)
+library(tmap)
 library(INLA)
 library(dplyr)
 library(spdep)
@@ -9,14 +10,13 @@ library(stringr)
 library(data.table)
 library(tidycensus)
 
-
-birth <- read.csv("/Users/brenna/Downloads/IndividualBirthDatav2.csv")
 #individual birth data (weight, year, race, fips, etc)
-dat_2015 <- st_read("/Users/brenna/Downloads/2015")
+birth <- read.csv("data/IndividualBirthDatav2.csv")
 #contains tract fips, year the site was added (siteaddedt)
-fqhc <- read_dta("/Users/brenna/Downloads/FQHC Data-selected/FQHCdens2008-2014_births2009-2016compiled_12-2019.dta")
-length(unique(fqhc$fips))*8 #2348
+dat_2015 <- st_read("data/2015")
 #contains annual FQHC density, tract fips
+fqhc <- read_dta("FQHC/FQHCdens2008-2014_births2009-2016compiled_12-2019.dta")
+length(unique(fqhc$fips))*8 #2348
 summary(fqhc)
 
 length(unique(birth$birthyear, birth$censustractcode))
